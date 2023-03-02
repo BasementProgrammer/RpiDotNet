@@ -65,8 +65,6 @@ Actions:
           IncludePaths:
             - report.sarif
     Inputs:
-      Sources:
-        - WorkflowSource
       Artifacts:
         - BuildOutput
     Compute:
