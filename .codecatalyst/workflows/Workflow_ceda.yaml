@@ -33,7 +33,7 @@ Actions:
         - Run: sudo yum install -y zip
         - Run: dotnet restore
         - Run: dotnet build
-        - Run: zip Build.zip /Rpi/bin/Debug/net6.0
+        - Run: zip Build.zip ./Rpi/bin/Debug/net6.0
   Test_0c:
     Identifier: aws/managed-test@v1
     Inputs:
