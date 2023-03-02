@@ -30,5 +30,6 @@ Actions:
     Configuration:
       # Required - Steps are sequential instructions that run shell commands
       Steps:
-        - Run: echo "dotnet restore"
+        - Run: dotnet restore
+        - Run: dotnet build
 
