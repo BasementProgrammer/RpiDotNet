@@ -47,4 +47,5 @@ Actions:
         - WorkflowSource
     Configuration:
       Steps:
-        - Run: dotnet test --logger "trx;logfilename=testResults.trx"
+        - Run: dotnet test --logger "trx;logfilename=testResults.trx" --collect "Code Coverage"
+        - Run: ls RpiDotNet.Test/TestResults/
