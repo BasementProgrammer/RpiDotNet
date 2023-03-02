@@ -35,6 +35,8 @@ Actions:
       AutoDiscoverReports:
         Enabled: true
         ReportNamePrefix: trx
+        SuccessCriteria:
+          PassRate: 100
       Reports:
         RpiTest-Results:
           Format: VISUALSTUDIOTRX
@@ -45,7 +47,29 @@ Actions:
     Inputs:
       Sources:
         - WorkflowSource
+      Artifacts:
+        - BuildOutput
     Configuration:
       Steps:
-        - Run: dotnet test --logger "trx;logfilename=testResults.trx" --collect "Code Coverage"
+        - Run: dotnet test --logger "trx;logfilename=testResults.trx" --collect "Code
+            Coverage"
         - Run: ls RpiDotNet.Test/TestResults/
+  MendSCA_69:
+    Identifier: mend/mendsca@v1
+    Outputs:
+      AutoDiscoverReports:
+        Enabled: false
+      Reports:
+        MendSCA:
+          Format: SARIFSCA
+          IncludePaths:
+            - report.sarif
+    Inputs:
+      Sources:
+        - WorkflowSource
+      Artifacts:
+        - BuildOutput
+    Compute:
+      Type: EC2
+    Configuration:
+      MendLicenseKey: SECRET_NAME
