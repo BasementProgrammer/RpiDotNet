@@ -25,10 +25,8 @@ Actions:
         - WorkflowSource
     Configuration:
       Steps:
-        - Run: sudo yum install -y zip
         - Run: dotnet restore
         - Run: dotnet build
-        - Run: ls ./Rpi/bin/Debug/net6.0
   Test_0c:
     Identifier: aws/managed-test@v1
     Outputs:
@@ -49,21 +47,7 @@ Actions:
         - WorkflowSource
     Configuration:
       Steps:
+        - Run: pwd
         - Run: dotnet test --logger "trx;logfilename=testResults.trx" --collect "Code
             Coverage"
         - Run: ls RpiDotNet.Test/TestResults/
-  MendSCA_ac:
-    Identifier: mend/mendsca@v1
-    Outputs:
-      Reports:
-        MendSCA:
-          Format: SARIFSCA
-          IncludePaths:
-            - report.sarif
-    Inputs:
-      Sources:
-        - WorkflowSource
-    Compute:
-      Type: EC2
-    Configuration:
-      MendLicenseKey: SECRET_NAME
