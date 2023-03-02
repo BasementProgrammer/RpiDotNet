@@ -31,9 +31,6 @@ Actions:
         - Run: ls ./Rpi/bin/Debug/net6.0
   Test_0c:
     Identifier: aws/managed-test@v1
-    Inputs:
-      Sources:
-        - WorkflowSource
     Outputs:
       AutoDiscoverReports:
         Enabled: true
@@ -42,10 +39,12 @@ Actions:
         UntitledReport:
           Format: VISUALSTUDIOTRX
           IncludePaths:
-            - RpiDotNet.Test/TestResults
-    Configuration:
-      Steps:
-        - Run: dotnet test 
-        - Run: ls RpiDotNet.Test/TestResults
+            - RpiDotNet.Test/TestResults/testResults.trx
     Compute:
       Type: EC2
+    Inputs:
+      Sources:
+        - WorkflowSource
+    Configuration:
+      Steps:
+        - Run: dotnet test --logger "trx;logfilename=testResults.trx"
