@@ -30,7 +30,7 @@ Actions:
     Configuration:
       # Required - Steps are sequential instructions that run shell commands
       Steps:
-        - Run: sudo apt install zip
+        - Run: sudo yum install -y zip
         - Run: dotnet restore
         - Run: dotnet build
         - Run: zip Build.zip /Rpi/bin/Debug/net6.0/* 
