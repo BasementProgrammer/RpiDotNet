@@ -37,9 +37,14 @@ Actions:
     Outputs:
       AutoDiscoverReports:
         Enabled: true
-        ReportNamePrefix: html
+        ReportNamePrefix: trx
+      Reports:
+        UntitledReport:
+          Format: VISUALSTUDIOTRX
+          IncludePaths:
+            - /RpiDotNet.Test/TestResults
     Configuration:
       Steps:
-        - Run: dotnet test --logger "html;logfilename=testresults.html"
+        - Run: dotnet test 
     Compute:
       Type: EC2
