@@ -26,6 +26,7 @@ Actions:
         - Run: sudo yum install -y zip
         - Run: dotnet restore
         - Run: dotnet build
+        - Run: ls ./Rpi/bin/Debug/net6.0
         - Run: zip Build.zip ./Rpi/bin/Debug/net6.0
     Compute:
       Type: EC2
