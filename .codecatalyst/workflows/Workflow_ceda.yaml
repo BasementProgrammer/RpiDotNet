@@ -42,9 +42,10 @@ Actions:
         UntitledReport:
           Format: VISUALSTUDIOTRX
           IncludePaths:
-            - /RpiDotNet.Test/TestResults
+            - RpiDotNet.Test/TestResults
     Configuration:
       Steps:
         - Run: dotnet test 
+        - Run: ls RpiDotNet.Test/TestResults
     Compute:
       Type: EC2
