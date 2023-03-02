@@ -45,8 +45,6 @@ Actions:
     Compute:
       Type: EC2
     Inputs:
-      Sources:
-        - WorkflowSource
       Artifacts:
         - BuildOutput
     Configuration:
@@ -54,11 +52,9 @@ Actions:
         - Run: dotnet test --logger "trx;logfilename=testResults.trx" --collect "Code
             Coverage"
         - Run: ls RpiDotNet.Test/TestResults/
-  MendSCA_69:
+  MendSCA_ac:
     Identifier: mend/mendsca@v1
     Outputs:
-      AutoDiscoverReports:
-        Enabled: false
       Reports:
         MendSCA:
           Format: SARIFSCA
