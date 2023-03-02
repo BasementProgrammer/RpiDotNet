@@ -45,8 +45,8 @@ Actions:
     Compute:
       Type: EC2
     Inputs:
-      Artifacts:
-        - BuildOutput
+      Sources:
+        - WorkflowSource
     Configuration:
       Steps:
         - Run: dotnet test --logger "trx;logfilename=testResults.trx" --collect "Code
@@ -61,8 +61,8 @@ Actions:
           IncludePaths:
             - report.sarif
     Inputs:
-      Artifacts:
-        - BuildOutput
+      Sources:
+        - WorkflowSource
     Compute:
       Type: EC2
     Configuration:
