@@ -10,30 +10,25 @@ Triggers:
 # Required - Define action configurations.
 Actions:
   Build_28:
-    # Identifies the action. Do not modify this value.
     Identifier: aws/build@v1
-
-    # Specifies the source and/or artifacts to pass to the action as input.
     Inputs:
-      # Optional
       Sources:
-        - WorkflowSource # This specifies that the action requires this Workflow as a source
-
+        - WorkflowSource
     Outputs:
-      # Optional; Automatically discover reports for popular test frameworks
       AutoDiscoverReports:
-        Enabled: true
-        # Use as prefix for the report files
-        ReportNamePrefix: rpt
-
-    # Defines the action's properties.
+        Enabled: false
+      Artifacts:
+        - Name: BuildOutput
+          Files:
+            - Build.zip
     Configuration:
-      # Required - Steps are sequential instructions that run shell commands
       Steps:
         - Run: sudo yum install -y zip
         - Run: dotnet restore
         - Run: dotnet build
         - Run: zip Build.zip ./Rpi/bin/Debug/net6.0
+    Compute:
+      Type: EC2
   Test_0c:
     Identifier: aws/managed-test@v1
     Inputs:
