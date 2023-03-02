@@ -45,9 +45,13 @@ Actions:
     Inputs:
       Sources:
         - WorkflowSource
+      Artifacts:
+        - BuildOutput
     Configuration:
       Steps:
         - Run: pwd
         - Run: dotnet test --logger "trx;logfilename=testResults.trx" --collect "Code
             Coverage"
         - Run: ls RpiDotNet.Test/TestResults/
+    DependsOn:
+      - Build_28
