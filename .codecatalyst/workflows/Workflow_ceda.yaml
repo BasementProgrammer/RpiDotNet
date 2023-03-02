@@ -36,7 +36,7 @@ Actions:
         Enabled: true
         ReportNamePrefix: trx
       Reports:
-        UntitledReport:
+        RpiTest-Results:
           Format: VISUALSTUDIOTRX
           IncludePaths:
             - RpiDotNet.Test/TestResults/testResults.trx
