@@ -10,26 +10,21 @@ Triggers:
 # Required - Define action configurations.
 Actions:
   Build_9b:
-    # Identifies the action. Do not modify this value.
     Identifier: aws/build@v1
-
-    # Specifies the source and/or artifacts to pass to the action as input.
     Inputs:
-      # Optional
       Sources:
-        - WorkflowSource # This specifies that the action requires this Workflow as a source
-
+        - WorkflowSource
     Outputs:
-      # Optional; Automatically discover reports for popular test frameworks
       AutoDiscoverReports:
         Enabled: true
-        # Use as prefix for the report files
         ReportNamePrefix: rpt
-
-    # Defines the action's properties.
+      Artifacts:
+        - Name: BuildRezult
+          Files:
+            - Rpi/bin/Debug/net6.0/*.*
     Configuration:
-      # Required - Steps are sequential instructions that run shell commands
       Steps:
         - Run: dotnet restore
         - Run: dotnet build
-        
+    Compute:
+      Type: EC2
