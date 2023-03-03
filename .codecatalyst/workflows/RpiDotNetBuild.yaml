@@ -29,28 +29,24 @@ Actions:
     Compute:
       Type: EC2
   Test_91:
-    # Identifies the action. Do not modify this value.
     Identifier: aws/managed-test@v1
-
-    # Specifies the source and/or artifacts to pass to the action as input.
     Inputs:
-      # Optional
       Sources:
-        - WorkflowSource # This specifies that the action requires this Workflow as a source
-
+        - WorkflowSource
+      Artifacts:
+        - BuildRezult
     Outputs:
-      # Optional; Automatically discover reports for popular test frameworks
       AutoDiscoverReports:
         Enabled: false
-        # Use as prefix for the report files
-        ReportNamePrefix: rpt
       Reports:
         RpiTest-Results:
           Format: VISUALSTUDIOTRX
           IncludePaths:
             - RpiDotNet.Test/TestResults/testResults.trx
-    # Defines the action's properties.
     Configuration:
-      # Required - Steps are sequential instructions that run shell commands
       Steps:
         - Run: dotnet test --logger "trx;logfilename=testResults.trx"
+    Compute:
+      Type: EC2
+    DependsOn:
+      - Build_9b
