@@ -41,16 +41,16 @@ Actions:
     Outputs:
       # Optional; Automatically discover reports for popular test frameworks
       AutoDiscoverReports:
-        Enabled: true
+        Enabled: false
         # Use as prefix for the report files
         ReportNamePrefix: rpt
-
+      Reports:
+        RpiTest-Results:
+          Format: VISUALSTUDIOTRX
+          IncludePaths:
+            - RpiDotNet.Test/TestResults/testResults.trx
     # Defines the action's properties.
     Configuration:
       # Required - Steps are sequential instructions that run shell commands
       Steps:
-        - Run: echo "Hello, World!"
-        - Run: echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" >> report.xml
-        - Run: echo "<testsuite tests=\"1\" name=\"TestAgentJunit\" >" >> report.xml
-        - Run: echo "<testcase classname=\"TestAgentJunit\" name=\"Dummy
-            Test\"/></testsuite>" >> report.xml
+        - Run: dotnet test --logger "trx;logfilename=testResults.trx"
