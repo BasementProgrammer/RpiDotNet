@@ -17,7 +17,7 @@ Actions:
       Artifacts:
         - Name: BuildOutput
           Files:
-            - Rpi/bin/Debug/net6.0
+            - Rpi/bin/Debug/net6.0/*.*
     Compute:
       Type: EC2
     Inputs:
