@@ -28,3 +28,25 @@ Actions:
         - Run: dotnet build
     Compute:
       Type: EC2
+  Test_fa:
+    Identifier: aws/managed-test@v1
+    Inputs:
+      Sources:
+        - WorkflowSource
+      Artifacts:
+        - BuildResults
+    Outputs:
+      AutoDiscoverReports:
+        Enabled: true
+        ReportNamePrefix: rpt
+    Configuration:
+      Steps:
+        - Run: echo "Hello, World!"
+        - Run: echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" >> report.xml
+        - Run: echo "<testsuite tests=\"1\" name=\"TestAgentJunit\" >" >> report.xml
+        - Run: echo "<testcase classname=\"TestAgentJunit\" name=\"Dummy
+            Test\"/></testsuite>" >> report.xml
+    Compute:
+      Type: EC2
+    DependsOn:
+      - Build_6b
