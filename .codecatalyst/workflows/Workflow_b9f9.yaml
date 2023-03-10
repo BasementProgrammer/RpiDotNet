@@ -37,8 +37,12 @@ Actions:
         - BuildResults
     Outputs:
       AutoDiscoverReports:
-        Enabled: true
-        ReportNamePrefix: rpt
+        Enabled: false
+      Reports:
+        RpiTest-Results:
+          Format: VISUALSTUDIOTRX
+          IncludePaths:
+            - RpiDotNet.Test/TestResults/testResults.trx
     Configuration:
       Steps:
         - Run: dotnet test --logger "trx;logfilename=testResults.trx"
