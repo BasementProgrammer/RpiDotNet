@@ -37,7 +37,8 @@ Actions:
         - BuildResults
     Outputs:
       AutoDiscoverReports:
-        Enabled: false
+        Enabled: true
+        ReportNamePrefix: rpt
       Reports:
         RpiTest-Results:
           Format: VISUALSTUDIOTRX
