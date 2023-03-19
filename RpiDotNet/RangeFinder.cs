@@ -14,27 +14,27 @@ namespace RpiDotNet
         public RangeFinder()
         {
             // Set the GPIO Pins
-            Gpio.PinMode(PIN_ECHO, Gpio.INPUT);
-            Gpio.PinMode(PIN_TRIGGER, Gpio.OUTPUT);
+            Gpio.OpenPin(PIN_ECHO, PinMode.Input);
+            Gpio.OpenPin(PIN_TRIGGER, PinMode.Output);
         }
 
-        public int GetDistance()
+        public double GetDistance()
         {
             // Send a 10us pulse to trigger
-            Gpio.DigitalWrite(PIN_TRIGGER, Gpio.HIGH);
-            Gpio.DelayMicroseconds(10);
-            Gpio.DigitalWrite(PIN_TRIGGER, Gpio.LOW);
+            Gpio.Write(PIN_TRIGGER, PinValue.High);
+            Thread.Sleep (10);
+            Gpio.Write(PIN_TRIGGER, PinValue.Low);
 
             // Wait for echo start
-            while (Gpio.DigitalRead(PIN_ECHO) == Gpio.LOW) ;
+            while (Gpio.Read(PIN_ECHO) == PinValue.Low) ;
 
             // Wait for echo end
-            var start = Gpio.Micros();
-            while (Gpio.DigitalRead(PIN_ECHO) == Gpio.HIGH) ;
-            var end = Gpio.Micros();
+            var start = DateTime.Now;
+            while (Gpio.Read(PIN_ECHO) == PinValue.High) ;
+            var end = DateTime.Now;
 
             // Get distance in cm
-            return (int)((end - start) / 58.2);
+            return  ((end - start).TotalSeconds / 58.2);
         }
     }
 }
