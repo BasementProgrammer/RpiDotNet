@@ -17,7 +17,7 @@
         "iot:Subscribe"
       ],
       "Resource": [
-        "arn:aws:iot:us-east-2:{ACCOUNT_NUMBER}:topicfilter/sdk/test/dotnet"
+        "arn:aws:iot:us-east-2:{ACCOUNT_NUMBER}:topicfilter/EnvironmentalSensor/1"
       ]
     },
     {
