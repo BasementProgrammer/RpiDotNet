@@ -15,6 +15,8 @@ EnvironmentSensor environment = new EnvironmentSensor (_controller, 16);
 while (true)
 {
     double temp = environment.GetTemperature ();
+    light.BlinkLight ();
+
     if ( temp > 0)
     {
         Console.WriteLine (temp + "c");
@@ -23,5 +25,6 @@ while (true)
     {
         Console.Write (".");
     }
+
     Thread.Sleep (1000);
 }
