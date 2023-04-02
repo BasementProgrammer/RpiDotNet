@@ -14,12 +14,14 @@ EnvironmentSensor environment = new EnvironmentSensor (_controller, 16);
 
 while (true)
 {
-    double temp = environment.GetTemperature ();
+    //double temp = environment.GetTemperature ();
+    var conditions = environment.GetConditions ();
+
     light.BlinkLight ();
 
-    if ( temp > 0)
+    if ( conditions !=  null)
     {
-        Console.WriteLine (temp + "c");
+        Console.WriteLine (conditions.Temperature + "c - " + conditions.Humidity + "%");
     }
     else
     {
