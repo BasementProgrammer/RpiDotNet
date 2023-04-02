@@ -3,6 +3,12 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Project secrets files
+RpiDotNet/Certificates/*.cert.pem
+RpiDotNet/Certificates/*.private.key
+RpiDotNet/Certificates/*.public.key
+RpiDotNet/Certificates/EnvironmentalMonitor-1-Policy
+
 # User-specific files
 *.rsuser
 *.suo
