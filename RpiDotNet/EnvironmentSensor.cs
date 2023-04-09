@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Device.Gpio;
 using UnitsNet;
@@ -16,7 +14,6 @@ namespace RpiDotNet
             _controller = controller;
             _pinNumber = pinNumber;
 
-            //controller.OpenPin (_pinNumber, PinMode.Input);
             _sensor = new Iot.Device.DHTxx.Dht11 (_pinNumber, PinNumberingScheme.Logical, _controller, false);
         }
 
