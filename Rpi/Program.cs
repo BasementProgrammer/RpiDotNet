@@ -4,29 +4,44 @@ using RpiDotNet;
 
 Console.WriteLine("Hello, World!");
 
-GpioController _controller = new GpioController (PinNumberingScheme.Logical);
+int _LightPin = 18;
+int _switchPin = 17;
+int _environmentPin = 16;
 
-WarningLight light = new WarningLight (_controller, 18);
+using GpioController _controller = new GpioController (PinNumberingScheme.Logical);
+WarningLight _warningLight = new WarningLight (_controller, _LightPin);
+EnvironmentSensor _environment = new EnvironmentSensor (_controller, _environmentPin);
 
-EnvironmentSensor environment = new EnvironmentSensor (_controller, 16);
+_controller.OpenPin (_switchPin, PinMode.InputPullUp);
+_controller.RegisterCallbackForPinValueChangedEvent(
+    _switchPin,
+    PinEventTypes.Falling | PinEventTypes.Rising,
+    OnPinEvent);
 
-//light.SetWarning (true);
 
 while (true)
 {
-    //double temp = environment.GetTemperature ();
-    var conditions = environment.GetConditions ();
-
-    light.BlinkLight ();
-
-    if ( conditions !=  null)
+    //_warningLight.BlinkLight ();
+    var tempHumidity = _environment.GetConditions ();
+    if (tempHumidity != null)
     {
-        Console.WriteLine (conditions.Temperature + "c - " + conditions.Humidity + "%");
+        Console.WriteLine ("Conditions = " + tempHumidity.Temperature + "c - " + tempHumidity.Humidity + "%");
+    }
+    System.Threading.Thread.Sleep (1000);
+}
+
+void OnPinEvent(object sender, PinValueChangedEventArgs args)
+{     
+    if (args.ChangeType == PinEventTypes.Falling)
+    {
+        // Door is open. There is no need to send sensor data.
+        Console.WriteLine ("Trigger");
+        _warningLight.SetWarning (true);
     }
     else
     {
-        Console.Write (".");
+        // Door is closed, we should send sensor data.
+        Console.WriteLine ("Clear");
+        _warningLight.SetWarning(false);
     }
-
-    Thread.Sleep (1000);
 }
