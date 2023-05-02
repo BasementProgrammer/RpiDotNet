@@ -18,7 +18,7 @@ namespace RpiDotNet
             _controller.OpenPin (pinNumber, PinMode.Output);
             _pinNumber = pinNumber;
 
-            // CReate a timer object to handle the warnings for tempereatire being out of range.
+            // Create a timer object to handle the warnings for tempereatire being out of range.
             _warningTimer = new Timer (new TimerCallback (DoWarningLight));
         }
 
